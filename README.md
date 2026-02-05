@@ -1,5 +1,9 @@
 # Skills Runtime Service (Django)
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/Django-4.2+-0C4B33.svg)](https://www.djangoproject.com/)
+
 独立的 Skills Runtime 服务，面向 Agent/业务系统提供标准化的 Skills 执行能力。
 
 ## 项目简介
