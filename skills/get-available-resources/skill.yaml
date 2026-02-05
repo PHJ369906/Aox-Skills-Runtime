@@ -1,0 +1,7 @@
+{
+  "name": "get-available-resources",
+  "description": "Detect CPU, memory, disk and platform info",
+  "runtime": {"type": "python"},
+  "timeout": 10000,
+  "artifacts": ["artifacts/resources.json"]
+}
