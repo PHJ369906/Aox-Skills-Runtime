@@ -1,7 +1,7 @@
 # Skills Runtime Service (Django)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-4.2+-0C4B33.svg)](https://www.djangoproject.com/)
 
 独立的 Skills Runtime 服务，面向 Agent/业务系统提供标准化的 Skills 执行能力。
@@ -36,7 +36,12 @@
 
 ## 安装与运行
 
+前置要求：
+- Python 3.10+
+
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 python manage.py runserver 0.0.0.0:8080
 ```

@@ -10,6 +10,8 @@ from typing import Any, Dict
 from .executor import SkillExecutor
 from .registry import SkillRegistry
 
+MIN_PYTHON = (3, 10)
+
 
 class RuntimeHandler(BaseHTTPRequestHandler):
     registry: SkillRegistry
@@ -113,6 +115,13 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> None:
+    if sys.version_info < MIN_PYTHON:
+        current = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+        required = ".".join(str(n) for n in MIN_PYTHON)
+        raise SystemExit(
+            f"Python {required}+ is required. Current interpreter: {current}"
+        )
+
     parser = build_parser()
     args = parser.parse_args()
 
