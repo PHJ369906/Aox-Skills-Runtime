@@ -1,0 +1,7 @@
+{
+  "name": "skill-installer",
+  "description": "List and install Codex skills from GitHub into this project's skills directory",
+  "runtime": {"type": "python"},
+  "timeout": 300000,
+  "artifacts": ["artifacts/last_result.json"]
+}

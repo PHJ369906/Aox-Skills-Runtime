@@ -1,0 +1,7 @@
+{
+  "name": "skill-creator",
+  "description": "Create, scaffold, and validate Codex skills using the official Skill Creator scripts",
+  "runtime": {"type": "python"},
+  "timeout": 120000,
+  "artifacts": ["artifacts/last_result.json"]
+}
