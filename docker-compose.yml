@@ -1,0 +1,31 @@
+services:
+  skills-runtime:
+    build:
+      context: https://github.com/PHJ369906/Aox-Skills-Runtime.git#main
+      dockerfile: Dockerfile
+    image: skills-runtime-service:local
+    ports:
+      - "8080:8080"
+    environment:
+      DJANGO_DEBUG: "0"
+      DJANGO_SECRET_KEY: "dev-compose-secret-change-me"
+      DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1"
+      SKILLS_DIR: "/app/skills"
+      ARTIFACTS_DIR: "/app/artifacts"
+      SQLITE_PATH: "/app/data/db.sqlite3"
+      DEFAULT_TIMEOUT_MS: "10000"
+      PORT: "8080"
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./data:/app/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/api/health', timeout=3)\"",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped

@@ -27,7 +27,16 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-dev-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", "1") == "1"
 
-ALLOWED_HOSTS = ["*"]
+if not DEBUG and SECRET_KEY == "django-insecure-dev-key":
+    raise RuntimeError("DJANGO_SECRET_KEY must be set when DJANGO_DEBUG=0")
+
+raw_allowed_hosts = os.environ.get("DJANGO_ALLOWED_HOSTS", "").strip()
+if raw_allowed_hosts:
+    ALLOWED_HOSTS = [host.strip() for host in raw_allowed_hosts.split(",") if host.strip()]
+elif DEBUG:
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "testserver"]
+else:
+    ALLOWED_HOSTS = ["localhost"]
 
 
 # Application definition
@@ -79,7 +88,7 @@ WSGI_APPLICATION = "skills_runtime_service.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": os.environ.get("SQLITE_PATH", str(BASE_DIR / "db.sqlite3")),
     }
 }
 

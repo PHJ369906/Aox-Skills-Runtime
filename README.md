@@ -43,6 +43,7 @@
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+python manage.py migrate
 python manage.py runserver 0.0.0.0:8080
 ```
 
@@ -52,7 +53,38 @@ python manage.py runserver 0.0.0.0:8080
 export SKILLS_DIR=./skills
 export ARTIFACTS_DIR=./artifacts
 export DEFAULT_TIMEOUT_MS=10000
+export DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
+export SQLITE_PATH=./db.sqlite3
 ```
+
+生产环境建议设置：
+
+```bash
+export DJANGO_DEBUG=0
+export DJANGO_SECRET_KEY='replace-with-a-strong-secret'
+export DJANGO_ALLOWED_HOSTS='your.domain.com'
+```
+
+## Docker 运行
+
+### 使用 Docker Compose
+
+```bash
+docker compose up --build -d
+curl http://localhost:8080/api/health
+docker compose logs -f
+```
+
+停止服务：
+
+```bash
+docker compose down
+```
+
+默认 compose 配置会：
+- 启动时自动执行 `python manage.py migrate`
+- 使用 `gunicorn` 监听 `0.0.0.0:8080`
+- 挂载 `./artifacts` 与 `./data`（持久化产物与 SQLite）
 
 ## API
 
