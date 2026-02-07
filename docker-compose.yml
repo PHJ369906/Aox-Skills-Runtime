@@ -1,7 +1,7 @@
 services:
   skills-runtime:
     build:
-      context: https://github.com/PHJ369906/Aox-Skills-Runtime.git#main
+      context: .
       dockerfile: Dockerfile
     image: skills-runtime-service:local
     ports:
